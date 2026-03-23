@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from 'react';
 import { Bell, Info, AlertTriangle, ShieldCheck, MailOpen, Trash2, Clock, Filter } from 'lucide-react';
 import { apiMethods } from '@/lib/api';
@@ -29,7 +30,7 @@ export default function NotificationsPage() {
     }
   };
 
-  const markAsRead = (id: number) => {
+  const markAsRead = (id: string) => {
     setNotifications(notifications.map(n => n.id === id ? { ...n, isRead: true } : n));
   };
 

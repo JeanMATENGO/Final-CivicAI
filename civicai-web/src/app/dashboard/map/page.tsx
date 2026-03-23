@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import Map, { Marker, NavigationControl } from 'react-map-gl';
+import { Map, Marker, NavigationControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { apiMethods } from '@/lib/api';
 import { MapPin, AlertCircle } from 'lucide-react';
