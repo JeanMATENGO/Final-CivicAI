@@ -51,7 +51,7 @@ export default function MapPage() {
       <div className="flex-1 bg-gray-100 rounded-3xl relative overflow-hidden shadow-inner border-4 border-white">
         <Map
           {...viewState}
-          onMove={evt => setViewState(evt.viewState)}
+          onMove={(evt: any) => setViewState(evt.viewState)}
           mapStyle="mapbox://styles/mapbox/streets-v11"
           mapboxAccessToken={MAPBOX_TOKEN}
           style={{ width: '100%', height: '100%' }}
