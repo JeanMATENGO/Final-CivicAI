@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: white;
+}
+
+.bg-danger { background-color: #EF4444; }
+.bg-alert { background-color: #F59E0B; }
+.bg-success { background-color: #10B981; }
+.bg-info { background-color: #3B82F6; }
+
+.text-civic-danger { color: #EF4444; }
+.text-civic-alert { color: #F59E0B; }
+.text-civic-success { color: #10B981; }
+.text-civic-info { color: #3B82F6; }

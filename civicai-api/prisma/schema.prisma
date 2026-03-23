@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum IncidentType {
+  ACCIDENT
+  TRAFFIC
+  FIRE
+  FLOOD
+  WASTE
+  THEFT
+  VIOLENCE
+  DANGER
+  ALERT
+  INFO
+}
+
+enum IncidentSeverity {
+  LOW
+  MEDIUM
+  CRITICAL
+}
+
+model User {
+  id               String       @id @default(uuid())
+  email            String       @unique
+  passwordHash     String?
+  name             String
+  role             Role         @default(USER)
+  phone            String?
+  profilePhotoUrl  String?
+  isLocationShared Boolean      @default(false)
+  pushToken        String?
+  locations        Location[]
+  incidents        Incident[]
+  historyLogs      HistoryLog[]
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+model Location {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  latitude  Float
+  longitude Float
+  city      String?
+  territory String?
+  village   String?
+  region    String?
+  country   String   @default("RDC")
+  updatedAt DateTime @updatedAt
+}
+
+model Incident {
+  id          String           @id @default(uuid())
+  reporterId  String
+  reporter    User             @relation(fields: [reporterId], references: [id])
+  type        IncidentType
+  latitude    Float
+  longitude   Float
+  description String
+  photoUrl    String?
+  status      String           @default("ACTIVE")
+  severity    IncidentSeverity @default(MEDIUM)
+  createdAt   DateTime         @default(now())
+}
+
+model HistoryLog {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  actionType String   // ex: ALERT_RECEIVED, ROUTE_CHECKED, IA_INTERACTION
+  metadata   Json?
+  timestamp  DateTime @default(now())
+}
+
+model AppConfig {
+  id          String   @id @default("global")
+  isAppActive Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+}
